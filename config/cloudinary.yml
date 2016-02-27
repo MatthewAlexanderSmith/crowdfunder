@@ -1,0 +1,22 @@
+
+development:
+  cloud_name: matthewalexander108
+  api_key: '883635873637681'
+  api_secret: k6aj5bcSiYee2MlHOGkxiqmaH3M
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: matthewalexander108
+  api_key: '883635873637681'
+  api_secret: k6aj5bcSiYee2MlHOGkxiqmaH3M
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: matthewalexander108
+  api_key: '883635873637681'
+  api_secret: k6aj5bcSiYee2MlHOGkxiqmaH3M
+  enhance_image_tag: true
+  static_image_support: false
+
+
+

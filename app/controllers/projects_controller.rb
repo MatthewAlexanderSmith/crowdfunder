@@ -59,6 +59,7 @@ class ProjectsController < ApplicationController
     @project.owner = current_user
 
     if @project.save
+
       flash[:notice] = "Project successfully created!"
       redirect_to project_path(@project)
     else

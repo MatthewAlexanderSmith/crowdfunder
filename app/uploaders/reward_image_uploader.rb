@@ -12,7 +12,7 @@ class RewardImageUploader < CarrierWave::Uploader::Base
   process :tags => ['reward_image']
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
