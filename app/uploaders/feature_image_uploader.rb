@@ -8,6 +8,8 @@ class FeatureImageUploader < CarrierWave::Uploader::Base
 
   include Cloudinary::CarrierWave
 
+  process :convert => 'png'
+  process :tags => ['feature_image']
 
 
   # Choose what kind of storage to use for this uploader:
