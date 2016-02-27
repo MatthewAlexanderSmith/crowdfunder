@@ -18,5 +18,10 @@
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
+
+  <div>
+    <%= f.label :reward_image %>
+    <%= f.file_field :reward_image %>
+  </div>
   <%= link_to_remove_association "Remove Reward", f %>
 </div>
