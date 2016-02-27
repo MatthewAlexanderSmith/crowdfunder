@@ -36,8 +36,8 @@ gem 'sorcery', '~> 0.9.1'
 gem 'cocoon'
 gem 'kaminari'
 
-gem 'cloudinary'
 gem 'carrierwave'
+gem 'cloudinary'
 gem 'rmagick', :require => 'RMagick'
 
 group :development, :test do
