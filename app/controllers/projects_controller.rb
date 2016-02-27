@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @project.rewards.build
+    @reward = @project.rewards.where(project_id: @project.id)
   end
 
   def update
@@ -105,7 +105,7 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:name, :end_date, :funding_goal, :description, :feature_image, rewards_attributes:
-        [:name, :price, :description, :reward_image, :number_available, :project_id, :_destroy])
+        [:name, :price, :description, :reward_image, :number_available, :project_id, :id, :_destroy])
   end
 
 end
