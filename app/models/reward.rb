@@ -5,6 +5,8 @@ class Reward < ActiveRecord::Base
   has_many :pledges, dependent: :destroy
   has_many :backers, through: :pledges, class_name: User
 
+  mount_uploader :reward_image, RewardImageUploader
+
   # method to check whether a reward is still available
   def available?
     self.pledges.count < self.number_available
