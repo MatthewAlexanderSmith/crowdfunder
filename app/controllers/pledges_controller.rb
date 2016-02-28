@@ -83,9 +83,6 @@ class PledgesController < ApplicationController
     #   # end
     # else
     #
-    #
-    #
-    #
     # end
 
   end

@@ -12,8 +12,12 @@ $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
 $("#pledge_amount").val('');
 
 <% if @project.fully_funded? %>
-
+  alert("Project fully funded! Thanks for your support!");
   $('.edit_pledge').hide();
+
+<% elsif (params[:pledge][:amount].to_i + @project.pledges.all.sum(:amount)) > @project.funding_goal %>
+  alert("We would love to take yor money! But we only need" + ' ' + '$' + $('#distance-to-goal').html() + ' ' +
+      'more!');
 
 <% end %>
 
