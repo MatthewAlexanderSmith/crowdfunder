@@ -59,7 +59,7 @@
 
 <div>
   <% if @project.owner == current_user %>
-    <%# render "pledges/index" %>
+    <%= render "pledges/index" %>
   <br>
   <%= link_to "Edit or Delete this project", edit_project_path %>
   <% end %>
