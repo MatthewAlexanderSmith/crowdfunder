@@ -43,10 +43,11 @@ class PledgesController < ApplicationController
   end
 
   def update
+    # Retrieves old pledge amount and adds new pledge amount to it.
     @pledge = Pledge.find(params[:id])
-    existing = @pledge.amount
+    @existing = @pledge.amount
     @pledge.update_attributes(pledge_params) #Updates @pledge with new amount value
-    @pledge.amount += existing
+    @pledge.amount += @existing
 
     if @pledge.save
 

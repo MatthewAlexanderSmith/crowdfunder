@@ -1,4 +1,6 @@
-<% unless @project.fully_funded? %>
+<% if @project.fully_funded?  %>
+
+<% else %>
   $('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
 
   $('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
@@ -6,4 +8,6 @@
   $('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
 
   $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
+
+  $("#pledge_amount").val('');
 <% end %>
