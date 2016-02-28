@@ -1,6 +1,7 @@
-<h4>Current Pledges for <%= @project.name %></h4>
+
 
 <div class="show-pledges">
+  <h4>Current Pledges for <%= @project.name %></h4>
   <% if @project.pledges.any? %>
     <ul>
     <% @project.pledges.each do |pledge| %>

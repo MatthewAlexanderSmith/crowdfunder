@@ -48,37 +48,11 @@
 
   <div class="pledge_form">
     <% if @project.pledges.find_by(backer_id: current_user) %>
-      <p>You've already backed this project.</p>
-      <p>You've pledged $<%= @project.pledges.find_by(backer_id: current_user).amount %>.00</p>
-      <p>Update your pledge:</p>
-      <%= form_for [@project, @pledge] do |f| %>
-
-        <div class="field">
-          <%= f.label :amount %>
-          <%= f.number_field :amount, value: @pledge.amount %>
-          <%= "   " %>
-          <%= link_to "Delete This Pledge", [@project, @pledge], method: :delete, data: {confirm: "Are you sure you want to delete this pledge?"} %>
-        </div>
-
-        <div class="action">
-          <%= f.submit "Submit your pledge" %>
-        </div>
-
-      <% end %>
+        <%= render "pledges_exist_form" %>
     <% else %>
-      <p>Pledge to this project:</p>
-      <%= form_for [@project, @pledge], id: "new-pledge" do |f| %>
-      <div class="field">
-        <%= f.label :amount %>
-        <%= f.number_field :amount %>
-      </div>
-
-      <div class="action">
-        <%= f.submit %>
-      </div>
-      <% end %>
+        <%= render "pledges_dont_exist_form" %>
     <% end %>
-  </div>
+ </div>
 
 
 
@@ -86,7 +60,7 @@
 
 <div>
   <% if @project.owner == current_user %>
-  <%= render "pledges/index" %>
+    <%= render "pledges/index" %>
   <br>
   <%= link_to "Edit or Delete this project", edit_project_path %>
   <% end %>

@@ -31,23 +31,22 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @tags = @project.tags.order(name: :asc)
 
-    if @project.pledges.find_by(backer_id: current_user)
-      @pledge = @project.pledges.find_by(backer_id: current_user)
-    else
-      @pledge = Pledge.new
-    end
 
     if current_user
       @comment = Comment.new
     end
 
+    if @project.pledges.find_by(backer_id: current_user)
+      @pledge = @project.pledges.find_by(backer_id: current_user)
+    else
+      @pledge = Pledge.new
+    end
     respond_to do |format|
       format.html
       format.js
-    end
-
-
+      end
   end
+
 
   def new
     @project = Project.new

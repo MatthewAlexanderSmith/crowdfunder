@@ -8,7 +8,7 @@ class RewardImageUploader < CarrierWave::Uploader::Base
 
   include Cloudinary::CarrierWave
 
-  process :convert => 'png'
+  process :convert => 'gif'
   process :tags => ['reward_image']
 
   # Choose what kind of storage to use for this uploader:

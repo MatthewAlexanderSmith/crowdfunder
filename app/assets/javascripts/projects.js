@@ -22,14 +22,14 @@ $(document).on('page:load ready', function() {
       dataType: 'script',
       data: self.serialize(),
       success: function(data) {
-        self.hide();
+        //self.hide();
       }
     })
   });
 
   $(document).on('submit', '.edit_pledge', function(e) {
     e.preventDefault();
-    var self = $(this)
+    var self = $(this);
 
     $.ajax({
       url: self.attr('action'),
@@ -37,7 +37,8 @@ $(document).on('page:load ready', function() {
       dataType: 'script',
       data: self.serialize(),
       success: function(data) {
-        self.hide();
+        //self.hide();
+
       }
     })
   })

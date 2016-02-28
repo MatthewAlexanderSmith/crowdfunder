@@ -44,23 +44,40 @@ class PledgesController < ApplicationController
 
   def update
     @pledge = Pledge.find(params[:id])
+    @pledge.update_attributes(pledge_params)
 
-    if @pledge.update_attributes(pledge_params)
+    if @pledge.save
+
       @pledge.get_reward?(@project)
-      @pledge.save
 
-      if @project.fully_funded?
-        @project.backers.each do |backer|
-          UserMailer.notify_fully_funded(backer, @project).deliver_later
-        end
+      # if @project.fully_funded?
+      #   @project.backers.each do |backer|
+      #     UserMailer.notify_fully_funded(backer, @project).deliver_later
+      #   end
+      # end
+
+      respond_to do |format|
+        format.html
+        format.js
       end
 
+
       flash[:notice] = "Pledge successfully updated."
-      redirect_to project_path(@project)
+      # redirect_to project_path(@project)
     else
-      render :edit
+      # render :edit
     end
+
   end
+
+
+
+
+
+
+
+
+
 
   def destroy
     @pledge = Pledge.find(params[:id])

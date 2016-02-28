@@ -8,7 +8,7 @@ class FeatureImageUploader < CarrierWave::Uploader::Base
 
   include Cloudinary::CarrierWave
 
-  process :convert => 'png'
+  process :convert => 'gif'
   process :tags => ['feature_image']
 
 
