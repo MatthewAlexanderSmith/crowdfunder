@@ -1,7 +1,9 @@
-$('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
+<% unless @project.fully_funded? %>
+  $('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
 
-$('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
+  $('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
 
-$('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
+  $('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
 
-$(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
+  $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
+<% end %>

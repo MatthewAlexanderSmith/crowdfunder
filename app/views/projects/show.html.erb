@@ -42,9 +42,8 @@
 </div>
 
 <div class="pledge-info">
-
-  <h3>Total pledges for this project: $<span id="total-pledges"><%= @project.pledges.all.sum(:amount) %></span>.00</h3>
-  <h4>Distance to Goal: $<span id="distance-to-goal"><%= @project.funding_goal - @project.pledges.all.sum(:amount) %></span>.00</h4>
+  <h3>Total pledges for this project: $<span id="total-pledges"></span></h3>
+  <h4>Distance to Goal: $<span id="distance-to-goal"></span></h4>
 
   <div class="pledge_form">
     <% if @project.pledges.find_by(backer_id: current_user) %>
