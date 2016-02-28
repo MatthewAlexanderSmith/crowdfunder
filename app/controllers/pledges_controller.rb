@@ -70,34 +70,31 @@ class PledgesController < ApplicationController
       @pledge.update_attributes(pledge_params) #Updates @pledge with new amount value
       @pledge.amount += @existing
 
-      @pledge.get_reward?(@project)
-
       if @pledge.save
+
         respond_to do |format|
           format.html{ redirect_to project_path(@project), notice: 'Pledge successfully updated.' }
           format.js
         end
+
+        @pledge.get_reward?(@project)
+
+        if @project.fully_funded?
+          @project.backers.each do |backer|
+            UserMailer.notify_fully_funded(backer, @project).deliver_later
+          end
+        end
+
       else
         # render :edit
       end
 
     else
-
       respond_to do |format|
         format.html
         format.js
       end
-
     end
-
-
-    # if @project.fully_funded?
-    #   # @project.backers.each do |backer|
-    #   #   UserMailer.notify_fully_funded(backer, @project).deliver_later
-    #   # end
-    # else
-    #
-    # end
 
   end
 
