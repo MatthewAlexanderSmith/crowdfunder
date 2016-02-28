@@ -15,7 +15,7 @@ class PledgesController < ApplicationController
 
   def create
 
-    unless params[:pledge][:amount].to_i >= @project.funding_goal
+    unless params[:pledge][:amount].to_i > @project.funding_goal
 
       @pledge = @project.pledges.build(pledge_params)
       @pledge.backer = current_user
@@ -23,18 +23,32 @@ class PledgesController < ApplicationController
 
       if @pledge.save
 
-       # redirect_to project_pledge_path(@project, @pledge), notice: "Pledge successfully submitted!"
+        respond_to do |format|
+          format.html{ redirect_to project_path(@project), notice: 'Pledge successfully updated.' }
+          format.js
+        end
+
       else
-        render :new, notice: "Pledge not successfully submitted!"
+
+        respond_to do |format|
+          format.html{ render :new, notice: "Pledge not successfully submitted!" }
+          format.js
+        end
+
       end
 
-      if @project.fully_funded?
-        @project.backers.each do |backer|
-          UserMailer.notify_fully_funded(backer, @project).deliver_later
-        end
-      end
+      # if @project.fully_funded?
+      #   @project.backers.each do |backer|
+      #     UserMailer.notify_fully_funded(backer, @project).deliver_later
+      #   end
+      # end
 
     else
+      @pledge = Pledge.new
+      respond_to do |format|
+        format.html{ redirect_to project_path(@project), notice: 'Pledge successfully updated.' }
+        format.js
+      end
 
       #render a message telling the user the total amount they can pledge
       #the user should only be able to pledge the value in the distance to goal field.

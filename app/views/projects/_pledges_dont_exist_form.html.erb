@@ -1,6 +1,6 @@
 <div id="pledges-dont-exist">
   <p>Pledge to this project:</p>
-  <%= form_for [@project, @pledge], id: "new-pledge" do |f| %>
+  <%= form_for [@project, @pledge], remote: true do |f| %>
       <div class="field">
         <%= f.label :amount %>
         <%= f.number_field :amount %>

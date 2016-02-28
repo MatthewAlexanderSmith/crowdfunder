@@ -11,3 +11,12 @@ $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
 //$(".pledge_form").html("#pledges-dont-exists");
 //$(".pledge_form").html("<%= j (render( :partial => 'projects/pledges_dont_exist_form')) %>");
 <% end %>
+
+<% if @project.fully_funded? %>
+  alert("project is fully funded!");
+
+<% elsif params[:pledge][:amount].to_i > @project.funding_goal  %>
+  alert("We would love to take yor money! But we only need" + ' ' + '$' + $('#distance-to-goal').html() + ' ' +
+    '!');
+  $("#pledge_amount").val('');
+<% end %>
