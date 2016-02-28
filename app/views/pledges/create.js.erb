@@ -1,0 +1,13 @@
+console.log("loaded create.js.erb");
+
+$('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
+$('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
+
+<% if @project.pledges.find_by(backer_id: current_user) %>
+$(".pledge_form").html("<%= j (render( :partial => 'projects/pledges_exist_form')) %>");
+$(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
+
+<% else %>
+//$(".pledge_form").html("#pledges-dont-exists");
+//$(".pledge_form").html("<%= j (render( :partial => 'projects/pledges_dont_exist_form')) %>");
+<% end %>

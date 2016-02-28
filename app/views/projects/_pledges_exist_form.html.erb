@@ -3,7 +3,7 @@
   <p>You've pledged <span>$<%= @project.pledges.find_by(backer_id: current_user).amount %></span></p>
   <p>Update your pledge:</p>
 
-  <%= form_for [@project, @pledge] do |f| %>
+  <%= form_for [@project, @pledge], remote: true do |f| %>
 
       <div class="field">
         <%= f.label :amount %>

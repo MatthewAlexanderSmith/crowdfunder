@@ -1,21 +1,20 @@
-<% if @project.fully_funded?  %>
+console.log("loaded update.js.erb")
+console.log(<%= @project.fully_funded? %>)
 
-  $("#pledge_amount").val('');
+$('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
 
-  $("#total-pledges").val(@project.funding_goal);
+$('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
 
-  $(".edit_pledge").hide();
+$('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
 
-<% else %>
+$(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
 
-  $('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
+$("#pledge_amount").val('');
 
-  $('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
+<% if @project.fully_funded? %>
 
-  $('#total-pledges').html('<%= @project.pledges.all.sum(:amount) %>');
-
-  $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
-
-  $("#pledge_amount").val('');
+  $('.edit_pledge').hide();
 
 <% end %>
+
+
