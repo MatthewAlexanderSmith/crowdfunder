@@ -1,8 +1,13 @@
 <% if @project.fully_funded?  %>
+
   $("#pledge_amount").val('');
+
+  $("#total-pledges").val(@project.funding_goal);
+
   $(".edit_pledge").hide();
 
 <% else %>
+
   $('.pledge_form span').html('$<%=@project.pledges.find_by(backer_id: current_user).amount %>');
 
   $('#distance-to-goal').html('<%= @project.funding_goal - @project.pledges.all.sum(:amount) %>');
@@ -12,4 +17,5 @@
   $(".show-pledges").html("<%= j (render( :partial => 'index')) %>")
 
   $("#pledge_amount").val('');
+
 <% end %>
