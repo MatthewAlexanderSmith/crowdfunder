@@ -27,6 +27,7 @@
 <% end %>
 
 <div class="rewards">
+</div>
   <h3>Rewards!</h3>
   <% @project.rewards.each do |reward| %>
   <p>
@@ -36,18 +37,17 @@
     Description: <%= reward.description %><br>
     <%= image_tag reward.reward_image.reward.url %>
   </p>
-  <% end %>
-</div>
-
+<% end %>
 <div class="pledge-info">
 
   <h3>Total pledges for this project: $<span id="total-pledges"><%= @project.pledges.all.sum(:amount) %></span>.00</h3>
   <h4>Distance to Goal: $<span id="distance-to-goal"><%= @project.funding_goal - @project.pledges.all.sum(:amount) %></span>.00</h4>
 
   <div class="pledge_form">
-    <% if @project.pledges.find_by(backer_id: current_user) %>
-      <p>You've already backed this project.</p>
-      <p>You've pledged $<%= @project.pledges.find_by(backer_id: current_user).amount %>.00</p>
+    <% current_pledge = @project.pledges.find_by(backer_id: current_user) %>
+    <% if current_pledge && current_pledge.amount > 0 %>
+      <p>Thank you for backing this project!</p>
+      <p>You've pledged $<%= current_pledge.amount %>.00, and earned the "<%= Reward.find(current_pledge.reward_id).name %>" reward.</p>
       <p>Update your pledge:</p>
       <%= form_for [@project, @pledge] do |f| %>
 
