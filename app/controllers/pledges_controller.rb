@@ -44,8 +44,9 @@ class PledgesController < ApplicationController
 
   def update
     @pledge = Pledge.find(params[:id])
-    @pledge.update_attributes(pledge_params)
-
+    existing = @pledge.amount
+    @pledge.update_attributes(pledge_params) #Updates @pledge with new amount value
+    @pledge.amount += existing
 
     if @pledge.save
 
@@ -57,7 +58,7 @@ class PledgesController < ApplicationController
         end
       end
 
-      binding.pry
+
 
       respond_to do |format|
         format.html
