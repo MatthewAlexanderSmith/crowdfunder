@@ -10,7 +10,7 @@ $("#pledge_amount").val('');
 <% if @project.fully_funded? %>
   alert("project is fully funded!");
 
-<% elsif params[:pledge][:amount].to_i > @project.funding_goal  %>
+<% elsif (params[:pledge][:amount].to_i + @project.pledges.all.sum(:amount)) > @project.funding_goal  %>
   alert("We would love to take yor money! But we only need" + ' ' + '$' + $('#distance-to-goal').html() + ' ' +
     '!');
   $("#pledge_amount").val('');

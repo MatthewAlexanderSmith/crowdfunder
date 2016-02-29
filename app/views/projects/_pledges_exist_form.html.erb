@@ -1,7 +1,8 @@
 <div id="pledges-exists">
-  <p>You've already backed this project.</p>
-  <p>You've pledged <span>$<%= @project.pledges.find_by(backer_id: current_user).amount %></span></p>
-
+  <% if @project.pledges.find_by(backer_id: current_user) %>
+    <p>You've already backed this project.</p>
+    <p>You've pledged <span>$<%= @project.pledges.find_by(backer_id: current_user).amount %></span></p>
+  <% end %>
   <%= form_for [@project, @pledge], remote: true do |f| %>
       <p>Update your pledge:</p>
       <div class="field">
